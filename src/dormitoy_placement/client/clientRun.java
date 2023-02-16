@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class clientRun {
     public static void main(String[] args) throws NotBoundException, RemoteException {
        clientImpl client=new clientImpl();
+//       admin ad= new admin();
         client.startClient();
         Scanner in = new Scanner(System.in);
 
@@ -22,11 +23,12 @@ public class clientRun {
             String result = null;
            try {
             result = client.Login(line,line2);
+
             if(result.equals("proctor")){
                 System.out.println("Logged in as Procter");
             } else if(result.equals("admin")) {
                 System.out.println("Logged in as Admin");
-
+                    new admin();
             }
             else if(result.equals("student")) {
                 System.out.println("Logged in as Student");

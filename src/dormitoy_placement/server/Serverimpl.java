@@ -1,10 +1,12 @@
 package dormitoy_placement.server;
 
 
+
 import dormitoy_placement.service.DPS;
 import java.sql.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 
 public class Serverimpl implements DPS {
@@ -13,6 +15,8 @@ public class Serverimpl implements DPS {
 
   public Connection conn = null;
     public Statement stmt = null;
+
+
 
 
 
@@ -82,6 +86,7 @@ public class Serverimpl implements DPS {
 
 
     }
+
 
 
 }
