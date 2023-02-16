@@ -5,5 +5,5 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 
 public interface DPS extends Remote {
-    String LoginAsAdmin(String username) throws RemoteException, SQLException;
+    String Login(String username ,String password) throws RemoteException, SQLException;
 }

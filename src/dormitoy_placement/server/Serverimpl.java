@@ -31,26 +31,40 @@ public class Serverimpl implements DPS {
     }
 
     @Override
-    public String LoginAsAdmin(String username) throws RemoteException, SQLException {
+    public String Login(String username, String password) throws RemoteException, SQLException {
+//        String name="befi";
+//        String pass="123";
         try {
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM user";
-            ResultSet rs = stmt.executeQuery(sql);
-            while(rs.next()) {
-                // Retrieve by column name
-                int id  = rs.getInt("id");
+            String sql = "SELECT * FROM user where username ='"+username+"'and password = '"+password +"'";
 
-                String name = rs.getString("username");
-                String pass = rs.getString("password");
-                   System.out.println("name"+name+"password"+pass);
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()){
+                System.out.println("Welcome::: " + username);
+                String type = rs.getString("type");
+                 return type;
 
             }
-            rs.close();
+            else {
+                System.out.println("Invalid user name and password");
+                return "wrong user";
+            }
+
+//            while(rs.next()) {
+//                // Retrieve by column name
+////                int id  = rs.getInt("id");
+////
+////                String name = rs.getString("username");
+////                String pass = rs.getString("password");
+//                   System.out.println("name"+name+"password"+pass);
+//
+//            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return "amen";
+
 
     }
 }

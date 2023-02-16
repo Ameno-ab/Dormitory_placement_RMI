@@ -17,10 +17,10 @@ public class clientImpl {
          server=(DPS) registry.lookup("Server");
      }
 
-public String LoginAsAdmin (String argu){
+public String Login (String username,String password){
      String res=null;
 try {
-      res=server.LoginAsAdmin(argu);
+      res=server.Login(username,password);
 }catch (RemoteException e) {
         e.printStackTrace();
         throw new RuntimeException("could not contact server");
