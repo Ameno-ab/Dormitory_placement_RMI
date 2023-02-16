@@ -26,10 +26,14 @@ public class clientRun {
                 System.out.println("Logged in as Procter");
             } else if(result.equals("admin")) {
                 System.out.println("Logged in as Admin");
+
             }
             else if(result.equals("student")) {
                 System.out.println("Logged in as Student");
-            }else{
+            }else if(result.equals("account blocked")){
+                System.out.println("Account blocked please contact Admin");
+            }
+            else{
                 System.out.println("Invalid user!please try again");
             }
            }catch (Exception e) {

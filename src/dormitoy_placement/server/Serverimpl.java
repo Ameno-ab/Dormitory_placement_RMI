@@ -1,14 +1,21 @@
 package dormitoy_placement.server;
 
+
 import dormitoy_placement.service.DPS;
 import java.sql.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+
 public class Serverimpl implements DPS {
+
+
 
   public Connection conn = null;
     public Statement stmt = null;
+
+
+
     public Serverimpl() throws RemoteException, ClassNotFoundException, SQLException {
         UnicastRemoteObject.exportObject(this , 0);
         String DB_URL = "jdbc:mysql://localhost:3306/dps";
@@ -32,6 +39,9 @@ public class Serverimpl implements DPS {
 
     @Override
     public String Login(String username, String password) throws RemoteException, SQLException {
+
+
+
 //        String name="befi";
 //        String pass="123";
         try {
@@ -40,11 +50,16 @@ public class Serverimpl implements DPS {
 
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next()){
-                System.out.println("Welcome::: " + username);
-                String type = rs.getString("type");
-                 return type;
-
-            }
+                Integer status = rs.getInt("status");
+                if (status == 1){
+                    System.out.println("Welcome::: " + status);
+                    String type = rs.getString("type");
+                    return type;
+                }else{
+                    System.out.println("account blocked"+ status);
+                    return "account blocked";
+                }
+           }
             else {
                 System.out.println("Invalid user name and password");
                 return "wrong user";
@@ -67,4 +82,6 @@ public class Serverimpl implements DPS {
 
 
     }
+
+
 }
