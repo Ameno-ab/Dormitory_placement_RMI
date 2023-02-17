@@ -3,12 +3,15 @@ package dormitoy_placement.client;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class clientRun {
 
     public static void main(String[] args) throws NotBoundException, RemoteException {
        clientImpl client=new clientImpl();
+        List<String> list = new ArrayList<String>();
        String user=null;
 //       admin ad= new admin();
         client.startClient();
@@ -112,9 +115,36 @@ public class clientRun {
                     System.out.println("Press 2 for View Dorm");
                     System.out.println("Press 3 to Quit\n \n ");
 
+
                     //Asking user to make choice
                     System.out.println("Make your choice");
                     int choice = Integer.parseInt(in.nextLine());
+
+                    if( choice ==1) {
+                        System.out.println("Book dorm....");
+                      list=client.getDorm();
+                        System.out.println("Avaliable dorm....");
+                        for (String l:list) {
+                            System.out.println("Avalible rooms"+l+"\n");
+                        }
+
+                        System.out.println("Please enter the id of dorm to book");
+                        int b = Integer.parseInt(in.nextLine());
+                      String res=client.Book(b,user);
+                      System.out.println(res);
+                       continue;
+                    }
+                    else if(choice ==2) {
+                        System.out.println("Press 2 for View Doem");
+
+                    }
+                    else if(choice == 3) {
+                        System.exit(0);
+
+                    }else {
+                        System.out.println("Invalid choice!!! Please make a valid choice. \\n\\n");
+                    }
+
                 }
             }
             }

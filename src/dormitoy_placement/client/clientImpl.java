@@ -7,12 +7,15 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class clientImpl {
     private DPS server;
+    List<String> list = new ArrayList<String>();
 
     public clientImpl() {}
-     public void startClient () throws RemoteException, NotBoundException {
+    public void startClient () throws RemoteException, NotBoundException {
          Registry registry= LocateRegistry.getRegistry("localhost",1098);
          server=(DPS) registry.lookup("Server");
      }
@@ -30,7 +33,7 @@ try {
     return res;
 }
 
-    public String Register (String username,String password,String type){
+public String Register (String username,String password,String type){
         String res=null;
         try {
             res=server.Register(username,password,type);
@@ -42,6 +45,29 @@ try {
         }
         return res;
     }
+  public List<String> getDorm(){
+      try {
+       list= server.getDorm();
+      }catch (RemoteException e) {
+          e.printStackTrace();
+          throw new RuntimeException("could not contact server");
+      } catch (SQLException e) {
+          throw new RuntimeException(e);
+      }
+      return list;
+  }
 
+  public String  Book(Integer  id,String username){
+        String res=null;
+      try {
+         res=server.Book(id,username);
+      }catch (RemoteException e) {
+          e.printStackTrace();
+          throw new RuntimeException("could not contact server");
+      } catch (SQLException e) {
+          throw new RuntimeException(e);
+      }
+   return res;
+  }
 
 }
