@@ -13,6 +13,7 @@ import java.util.List;
 public class clientImpl {
     private DPS server;
     List<String> list = new ArrayList<String>();
+    List<String> req = new ArrayList<String>();
 
     public clientImpl() {}
     public void startClient () throws RemoteException, NotBoundException {
@@ -69,5 +70,56 @@ public String Register (String username,String password,String type){
       }
    return res;
   }
+  public List<String> getRequest(){
+        try {
+            req= server.getRequest();
+        }catch (RemoteException e) {
+            e.printStackTrace();
+            throw new RuntimeException("could not contact server");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return req;
+    }
+    public String  setRequest(Integer id,Integer req){
+        String res=null;
+        try {
+            res=server.setRequest(id,req);
+        }catch (RemoteException e) {
+            e.printStackTrace();
+            throw new RuntimeException("could not contact server");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+    public String viewDorm(String username){
+        String res=null;
+        try {
+            res= server.viewDorm(username);
+        }catch (RemoteException e) {
+            e.printStackTrace();
+            throw new RuntimeException("could not contact server");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+    public String addDorm(String blockname) {
+        String res=null;
+        try {
+            res=server.addDorm(blockname);
+        }catch (RemoteException e) {
+            e.printStackTrace();
+            throw new RuntimeException("could not contact server");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+
+
 
 }

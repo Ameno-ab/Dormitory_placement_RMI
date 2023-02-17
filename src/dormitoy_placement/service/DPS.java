@@ -12,5 +12,17 @@ public interface DPS extends Remote {
    List<String> getDorm() throws RemoteException,SQLException;
 
    String  Book(Integer id,String username) throws RemoteException,SQLException;
+   List<String> getRequest() throws RemoteException,SQLException;
+   String setRequest(Integer id,Integer req) throws  RemoteException,SQLException;
+
+   String viewDorm(String username) throws RemoteException,SQLException;
+
+   String addDorm(String blockname) throws  RemoteException,SQLException;
+
+
+
+
+
+
 
 }
