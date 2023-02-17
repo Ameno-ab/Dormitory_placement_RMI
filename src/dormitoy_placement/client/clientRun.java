@@ -1,12 +1,15 @@
 package dormitoy_placement.client;
 
+
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class clientRun {
+
     public static void main(String[] args) throws NotBoundException, RemoteException {
        clientImpl client=new clientImpl();
+       String user=null;
 //       admin ad= new admin();
         client.startClient();
         Scanner in = new Scanner(System.in);
@@ -20,20 +23,104 @@ public class clientRun {
 
             if(line.equalsIgnoreCase("exit")) break;
 
-            String result = null;
+            String[] result = new String[4];
+
            try {
             result = client.Login(line,line2);
-
-            if(result.equals("proctor")){
+             if(result[0].equals("true")){
+                 if(result[1].equals("1")){
+                     user=result[3];
+            if(result[2].equals("proctor")){
                 System.out.println("Logged in as Procter");
-            } else if(result.equals("admin")) {
-                System.out.println("Logged in as Admin");
-                    new admin();
             }
-            else if(result.equals("student")) {
+            else if(result[2].equals("admin")) {
+                System.out.println("Logged in as Admin");
+                System.out.println("Welcome"+user);
+
+                while (true) {
+                    //Creating menu
+                    System.out.println("Press 1 for Add user");
+                    System.out.println("Press 2 for Manage account");
+                    System.out.println("Press 3 to Quit\n \n ");
+
+                    //Asking user to make choice
+                    System.out.println("Make your choice");
+                    int choice = Integer.parseInt(in.nextLine());
+
+
+                    if( choice ==1) {
+                        System.out.println("Add user....");
+                        System.out.println("Enter Username");
+
+                        String name = in.nextLine();
+
+                        System.out.println("Enter Password");
+                        String pass = in.nextLine();
+
+                        System.out.println("Enter Type");
+
+                        System.out.println("Press 1 for Admin");
+                        System.out.println("Press 2 for Student");
+                        System.out.println("Press 3 to for proctor");
+                        int typechoice = Integer.parseInt(in.nextLine());
+                        String type = "";
+                        if(typechoice == 1) {
+                            type=new String("admin");
+
+                        }
+                        else if(typechoice == 2) {
+                            type = new String("student");
+                        }
+                        else if (typechoice == 3){
+                            type = new String("procter");
+
+                        }else{
+                            System.out.println("please make a valid choice");
+
+                        }
+                        String result2=null;
+                        try {
+                            result2= client.Register(name,pass,type);
+                            System.out.println(result2);
+
+                        }catch (Exception e){
+                            System.out.println("Error:" + e.getMessage());
+                        }
+                        System.out.println("user"+name+ "pass"+pass+"type"+type);
+                    }
+                    else if(choice ==2) {
+                        System.out.println("Press 2 for Manage account");
+
+                    }
+                    else if(choice == 3) {
+                        System.exit(0);
+
+                    }else {
+                        System.out.println("Invalid choice!!! Please make a valid choice. \\n\\n");
+                    }
+
+                }
+
+
+            }
+            else if(result[2].equals("student")) {
                 System.out.println("Logged in as Student");
-            }else if(result.equals("account blocked")){
+                System.out.println("Welcome"+user);
+                while (true) {
+                    //Creating menu
+                    System.out.println("Press 1 for Book Dorm");
+                    System.out.println("Press 2 for View Dorm");
+                    System.out.println("Press 3 to Quit\n \n ");
+
+                    //Asking user to make choice
+                    System.out.println("Make your choice");
+                    int choice = Integer.parseInt(in.nextLine());
+                }
+            }
+            }
+            else{
                 System.out.println("Account blocked please contact Admin");
+            }
             }
             else{
                 System.out.println("Invalid user!please try again");

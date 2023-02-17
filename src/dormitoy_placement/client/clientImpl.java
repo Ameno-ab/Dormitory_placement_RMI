@@ -17,8 +17,8 @@ public class clientImpl {
          server=(DPS) registry.lookup("Server");
      }
 
-public String Login (String username,String password){
-     String res=null;
+public String[] Login (String username,String password){
+     String[] res= new String[4];
 try {
       res=server.Login(username,password);
 }catch (RemoteException e) {
@@ -29,4 +29,19 @@ try {
 }
     return res;
 }
+
+    public String Register (String username,String password,String type){
+        String res=null;
+        try {
+            res=server.Register(username,password,type);
+        }catch (RemoteException e) {
+            e.printStackTrace();
+            throw new RuntimeException("could not contact server");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+
 }
