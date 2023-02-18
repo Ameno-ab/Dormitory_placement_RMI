@@ -183,17 +183,22 @@ public class clientRun {
 
                     if( choice ==1) {
                         System.out.println("Book dorm....");
-                      list=client.getDorm();
+                        list = client.getDorm();
                         System.out.println("Avaliable dorm....");
-                        for (String l:list) {
-                            System.out.println("Avalible rooms"+l+"\n");
-                        }
+                        if (!list.isEmpty()) {
+                            for (String l : list) {
+                                System.out.println("Avalible rooms" + l + "\n");
+                            }
 
-                        System.out.println("Please enter the id of dorm to book");
-                        int b = Integer.parseInt(in.nextLine());
-                      String res=client.Book(b,user);
-                      System.out.println(res);
-                       continue;
+                            System.out.println("Please enter the id of dorm to book");
+                            int b = Integer.parseInt(in.nextLine());
+                            String res = client.Book(b, user);
+                            System.out.println(res);
+                            continue;
+                        } else {
+                            System.out.println("NO Room Available");
+                            continue;
+                        }
                     }
                     else if(choice ==2) {
                          String viw=client.viewDorm(user);
