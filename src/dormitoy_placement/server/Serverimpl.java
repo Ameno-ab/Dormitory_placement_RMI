@@ -293,4 +293,34 @@ public class Serverimpl implements DPS {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public String managAccout(String username, Integer status) throws RemoteException, SQLException {
+
+        try{
+            stmt = conn.createStatement();
+
+            String sql = "SELECT * FROM user where username ='"+username+"' ";
+            PreparedStatement p = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                String sql2= "update user set status='"+status+"' where username='"+username+"'";
+
+                int result = stmt.executeUpdate(sql2);
+                if (result > 0) {
+                    return "Operation successful";
+                }else{
+
+                    return "Operation Not Successful";
+                }
+            }
+            else{
+                return "No User Found";
+            }
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+    }
 }

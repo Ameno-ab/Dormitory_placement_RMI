@@ -119,6 +119,19 @@ public String Register (String username,String password,String type){
         return res;
     }
 
+    public String manageAccount (String username , Integer status){
+        String res=null;
+        try {
+            res=server.managAccout(username,status);
+        }catch (RemoteException e) {
+            e.printStackTrace();
+            throw new RuntimeException("could not contact server");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
 
 
 

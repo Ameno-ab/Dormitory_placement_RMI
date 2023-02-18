@@ -19,6 +19,8 @@ public interface DPS extends Remote {
 
    String addDorm(String blockname) throws  RemoteException,SQLException;
 
+   String managAccout(String username ,Integer status ) throws  RemoteException,SQLException;
+
 
 
 

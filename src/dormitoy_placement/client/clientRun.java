@@ -14,7 +14,7 @@ public class clientRun {
         List<String> list = new ArrayList<String>();
         List<String> req = new ArrayList<String>();
        String user=null;
-//       admin ad= new admin();
+
         client.startClient();
         Scanner in = new Scanner(System.in);
 
@@ -36,7 +36,7 @@ public class clientRun {
                      user=result[3];
             if(result[2].equals("proctor")){
                 System.out.println("Logged in as Procter");
-                System.out.println("Welcome"+user);
+                System.out.println("Welcome\t" + user);
 
                 while (true) {
                     //Creating menu
@@ -85,7 +85,7 @@ public class clientRun {
             }
             else if(result[2].equals("admin")) {
                 System.out.println("Logged in as Admin");
-                System.out.println("Welcome"+user);
+                System.out.println("Welcome\t" + user);
 
                 while (true) {
                     //Creating menu
@@ -140,6 +140,19 @@ public class clientRun {
                     }
                     else if(choice ==2) {
                         System.out.println("Press 2 for Manage account");
+                        System.out.println("Manage user....");
+                        System.out.println("Enter Username");
+
+                        String name = in.nextLine();
+
+                        System.out.println("press 1 for activate and 0 to deavtivate");
+
+                        Integer sta=in.nextInt();
+
+                        String res=client.manageAccount(name,sta);
+                        System.out.println(res);
+
+
 
                     }
                     else if(choice == 3) {
@@ -156,7 +169,7 @@ public class clientRun {
             }
             else if(result[2].equals("student")) {
                 System.out.println("Logged in as Student");
-                System.out.println("Welcome"+user);
+                System.out.println("Welcome \t" + user);
                 while (true) {
                     //Creating menu
                     System.out.println("Press 1 for Book Dorm");
